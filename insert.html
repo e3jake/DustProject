@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+   #regbox{ width : 300pxl }
+   #regbox{ display : block; width: 100px; float: left; }
+</style>
+</head>
+<body>
+<form method="post" action="insert.jsp">
+   <fieldset id="regbox">
+      <legend>Insert Data...</legend>
+      <label for="drone_id">drone id</label>
+        <input type="text" name="drone_id"/><br/>
+      <label for="dust_id">dust id</label>
+        <input type="text" name="dust_id"/><br/>
+      <label for="gps_id">gps id</label>
+        <input type="text" name="gps_id"/><br/>
+      <label for="result">result</label>
+        <input type="number" step=any name="result"/><br/>
+      <label for="std_result">std_result</label>
+        <input type="number" step=any name="std_result"/><br/>
+      <input type="submit" value="insert">
+      <input type="reset" value="cancel"/>
+   </fieldset>
+</form>
+</body>
+</html>
