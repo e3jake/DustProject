@@ -16,11 +16,12 @@
         List dustlist = new LinkedList();
  
 	//전체 데이터 
-        //String query = "select datecreated, drone_id, dust_id, gps_id, chkpmValue, pm25Value, pm10Value from dust order by datecreated desc";
-        String query = "select datecreated as mdatecreated, chkpmValue, pm25Value, pm10Value from dust";
+        //String query = "select datecreated as mdatecreated, pm10Value, pm25Value from dust_airkorea where gps_id='JongRo-Gu'";
+        //String query = "select a.datecreated as mdatecreated, b.pm25Value as Drnpm25Value, a.pm10Value as pm10Value, a.pm25Value as pm25Value from dust_airkorea a, dust_drone b where b.gps_id='JongRo-Gu'";
 
-	//일별 평균값을 산출
-        //String query = "select DATE_FORMAT(datecreated, '%Y-%m-%d') mdatecreated, avg(chkpmValue) chkpmValue, avg(pm25Value) pm25Value, avg(pm10Value) pm10Value from dust group by mdatecreated";
+	//시간대별  평균값을 산출
+	String query = "select DATE_FORMAT(a.datecreated, '%Y-%m-%d %H:00:00') mdatecreated, avg(a.pm10Value) as Drnpm10Value, avg(a.pm25Value) as Drnpm25Value , avg(b.pm10Value) as pm10Value, avg(b.pm25Value) as pm25Value from dust_drone a inner join dust_airkorea b where a.gps_id=b.gps_id and DATE_FORMAT(a.datecreated,'%Y-%m-%d %H:00')=DATE_FORMAT(b.datecreated,'%Y-%m-%d %H:00') group by mdatecreated";
+
 
 	PreparedStatement pstm = con.prepareStatement(query);
         rs = pstm.executeQuery(query);
@@ -33,14 +34,16 @@
 
     	while (rs.next()) {
             	String mdatecreated = rs.getString("mdatecreated");
-            	float chkpmValue = rs.getFloat("chkpmValue");
-            	float pm25Value = rs.getFloat("pm25Value");
+            	float Drnpm10Value = rs.getFloat("Drnpm10Value");
+            	float Drnpm25Value = rs.getFloat("Drnpm25Value");
             	float pm10Value = rs.getFloat("pm10Value");
+            	float pm25Value = rs.getFloat("pm25Value");
  	    	lineObj = new JSONObject();
             	lineObj.put("mdatecreated", mdatecreated);
-            	lineObj.put("chkpmValue", (int)chkpmValue);
-            	lineObj.put("pm25Value", (int)pm25Value);
+            	lineObj.put("Drnpm10Value", (int)Drnpm10Value);
+            	lineObj.put("Drnpm25Value", (int)Drnpm25Value);
             	lineObj.put("pm10Value", (int)pm10Value);
+            	lineObj.put("pm25Value", (int)pm25Value);
             	dustlist.add(lineObj);
         } 
 
