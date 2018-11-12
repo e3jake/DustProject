@@ -41,6 +41,14 @@
     printTime();
   }
   </script>
+
+  <script>
+  function sleep (delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  }
+  </script>	  
+	  
   </head>
 
   <script>
@@ -156,6 +164,7 @@
           dashboard.draw(data);
 
         }
+	sleep(1000);
         google.charts.setOnLoadCallback(drawDashboard);
 
       }
