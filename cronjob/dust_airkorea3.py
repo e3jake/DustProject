@@ -73,3 +73,5 @@ if CurrentTime != 0:
 
     else :
         sys.exit(1)
+else :
+    sys.exit(1)
