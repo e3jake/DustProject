@@ -9,7 +9,7 @@
     try {
         //드라이버 호출, 커넥션 연결
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?autoReconnect=true&useSSL=false", "mgt", "mgt");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?autoReconnect=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC", "mgt", "mgt");
 
     	ResultSet rs = null;
         //DB에서 뽑아온 데이터(JSON) 을 담을 객체. 후에 responseObj에 담기는 값
